@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngFor="let group of formFields">
+      <fieldset>
+        <legend>{{ group.label }}</legend>
+        <div *ngFor="let field of group.fields">
+          <div *ngIf="field.type === 'text'">
+            <label>{{ field.label }}</label>
+            <input type="text" [formControlName]="field.name" [placeholder]="field.placeholder" />
+          </div>
+          <div *ngIf="field.type === 'date'">
+            <label>{{ field.label }}</label>
+            <input type="date" [formControlName]="field.name" />
+          </div>
+          <div *ngIf="field.type === 'radio'">
+            <label>{{ field.label }}</label>
+            <div *ngFor="let option of field.options">
+              <input type="radio" [formControlName]="field.name" [value]="option.value" /> {{ option.label }}
+            </div>
+          </div>
+          <div *ngIf="field.type === 'checkbox'">
+            <label>{{ field.label }}</label>
+            <div *ngFor="let option of field.options">
+              <input type="checkbox" [formControlName]="field.name" [value]="option.value" /> {{ option.label }}
+            </div>
+          </div>
+          <div *ngIf="field.type === 'select'">
+            <label>{{ field.label }}</label>
+            <select [formControlName]="field.name">
+              <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  
