@@ -117,6 +117,6 @@ export class AppComponent {
   constructor(private employeeDataService: EmployeeDataService) {}
 
   onFormSubmit(formData: any): void {
-    console.log('Form Data:', formData);
+    // console.log('Form Datas:', formData);
   }
 }

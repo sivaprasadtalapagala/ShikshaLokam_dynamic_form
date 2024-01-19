@@ -1,37 +1,45 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div *ngFor="let group of formFields">
-      <fieldset>
-        <legend>{{ group.label }}</legend>
-        <div *ngFor="let field of group.fields">
-          <div *ngIf="field.type === 'text'">
-            <label>{{ field.label }}</label>
-            <input type="text" [formControlName]="field.name" [placeholder]="field.placeholder" />
-          </div>
-          <div *ngIf="field.type === 'date'">
-            <label>{{ field.label }}</label>
-            <input type="date" [formControlName]="field.name" />
-          </div>
-          <div *ngIf="field.type === 'radio'">
-            <label>{{ field.label }}</label>
-            <div *ngFor="let option of field.options">
-              <input type="radio" [formControlName]="field.name" [value]="option.value" /> {{ option.label }}
+<div class=" p-4">
+  <div class="col-6">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-group">
+      <div *ngFor="let group of formFields">
+        <fieldset>
+          <legend>{{ group.label }}</legend>
+          <div *ngFor="let field of group.fields">
+            <div *ngIf="field.type === 'text'">
+              <label>{{ field.label }}</label>
+              <input type="text" [formControlName]="field.name" [placeholder]="field.placeholder" class="form-control"/>
+              <div class="error-message" *ngIf="showError(field.name)">{{ getFieldError(field.name) }}</div>
+            </div>
+            <div *ngIf="field.type === 'date'">
+              <label>{{ field.label }}</label>
+              <input type="date" [formControlName]="field.name" class="form-control"/>
+            </div>
+            <div *ngIf="field.type === 'radio'">
+              <label>{{ field.label }}</label>
+              <div *ngFor="let option of field.options">
+                <input type="radio" [formControlName]="field.name" [value]="option.value" /> {{ option.label }}
+              </div>
+            </div>
+            <div *ngIf="field.type === 'checkbox'">
+              <label>{{ field.label }}</label>
+              <div *ngFor="let option of field.options">
+                <input type="checkbox" [formControlName]="field.name" [value]="option.value" /> {{ option.label }}
+              </div>
+            </div>
+            <div *ngIf="field.type === 'select'">
+              <label>{{ field.label }}</label>
+              <select [formControlName]="field.name" class="form-control">
+                <option value="" disabled selected>---Select---</option>
+                <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
+              </select>
             </div>
           </div>
-          <div *ngIf="field.type === 'checkbox'">
-            <label>{{ field.label }}</label>
-            <div *ngFor="let option of field.options">
-              <input type="checkbox" [formControlName]="field.name" [value]="option.value" /> {{ option.label }}
-            </div>
-          </div>
-          <div *ngIf="field.type === 'select'">
-            <label>{{ field.label }}</label>
-            <select [formControlName]="field.name">
-              <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}</option>
-            </select>
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <button type="submit">Submit</button>
-  </form>
+    </form>
+  </div>
+</div>
   
